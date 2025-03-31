@@ -168,6 +168,3 @@ old/
 
 # PDF-files (articles)
 *.pdf
-
-# Generated summaries
-summaries/*.txt
