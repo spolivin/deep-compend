@@ -1,5 +1,6 @@
-torch
-transformers
-peft
-nltk
-pymupdf
+torch==2.6.0
+transformers==4.50.0
+peft==0.15.0
+nltk==3.9.1
+pymupdf==1.25.4
+spacy==3.8.4
