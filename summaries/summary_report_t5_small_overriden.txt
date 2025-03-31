@@ -1,0 +1,26 @@
+=== Summarization Report 6B6064 ===
+
+Article path: 'articles/1301.3781v3.pdf'
+Model: google-t5/t5-small
+Tokenizer: google-t5/t5-small
+Context window: 512
+LoRA: None
+Gen time: 2025-03-31 12:25:03
+Keywords: ['word', 'words', 'model', 'vectors', 'training', 'models', 'data', 'nnlm', 'layer', 'gram']
+
+-------------------------------------------------------------------------------------------------------
+This choice has several good reasons - simplicity, robustness and the observation that simple models
+trained on huge amounts of data outperform complex systems trained on less data. Today, it is
+possible to train ngrams on virtually all available data (trillions of words) but the simple
+techniques are at their limits in many tasks.
+-------------------------------------------------------------------------------------------------------
+
+Statistics:
+----------
+word_count_summary: 60
+word_count_full: 5926
+sentence_count_summary: 2
+sentence_count_full: 192
+input_token_count: 512
+output_token_count: 76
+compression_rate: 1.03%

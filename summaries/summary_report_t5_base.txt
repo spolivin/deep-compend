@@ -1,0 +1,26 @@
+=== Summarization Report 882AD8 ===
+
+Article path: 'articles/1301.3781v3.pdf'
+Model: google-t5/t5-base
+Tokenizer: google-t5/t5-base
+Context window: 1024
+LoRA: None
+Gen time: 2025-03-31 12:21:19
+Keywords: ['word', 'words', 'model', 'vectors', 'training']
+
+-------------------------------------------------------------------------------------------------------
+Many current nlp systems and techniques treat words as atomic units. There is no notion of
+similarity between words, as they are represented as indices in a vocabulary. This choice has
+several good reasons - simplicity, robustness and observation that simple models outperform complex
+systems trained on less data.
+-------------------------------------------------------------------------------------------------------
+
+Statistics:
+----------
+word_count_summary: 54
+word_count_full: 5926
+sentence_count_summary: 3
+sentence_count_full: 192
+input_token_count: 1024
+output_token_count: 69
+compression_rate: 0.97%

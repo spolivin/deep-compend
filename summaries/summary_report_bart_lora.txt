@@ -1,0 +1,28 @@
+=== Summarization Report A820A5 ===
+
+Article path: 'articles/1301.3781v3.pdf'
+Model: facebook/bart-large-cnn
+Tokenizer: facebook/bart-large-cnn
+Context window: 1024
+LoRA: spolivin/bart-arxiv-lora
+Gen time: 2025-03-31 12:19:25
+Keywords: ['word', 'words', 'model', 'vectors', 'training']
+
+-------------------------------------------------------------------------------------------------------
+We develop new techniques for learning highquality word vectors from huge data sets with billions of
+words, and with millions of words in the vocabulary. We use recently proposed techniques for
+measuring the quality of the resulting vector representations, with the expectation that not only
+will similar words tend to be close to each other, but that words can have multiple degrees of
+similarity. We design a new comprehensive test set for measuring both syntactic and semantic
+regularities, and show that many such regularities can be learned with high accuracy.
+-------------------------------------------------------------------------------------------------------
+
+Statistics:
+----------
+word_count_summary: 97
+word_count_full: 5926
+sentence_count_summary: 3
+sentence_count_full: 192
+input_token_count: 1024
+output_token_count: 112
+compression_rate: 1.75%

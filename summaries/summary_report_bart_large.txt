@@ -1,0 +1,26 @@
+=== Summarization Report 243A27 ===
+
+Article path: 'articles/1301.3781v3.pdf'
+Model: facebook/bart-large-cnn
+Tokenizer: facebook/bart-large-cnn
+Context window: 1024
+LoRA: None
+Gen time: 2025-03-31 12:18:28
+Keywords: ['word', 'words', 'model', 'vectors', 'training']
+
+-------------------------------------------------------------------------------------------------------
+Simple nlp techniques are at their limits in many tasks. In machine translation, the existing
+corpora for many languages contain only a few billions of words or less. We use recently proposed
+techniques for measuring the quality of the resulting vector representations. We design a new
+comprehensive test set for measuring both syntactic and semantic regularities.
+-------------------------------------------------------------------------------------------------------
+
+Statistics:
+----------
+word_count_summary: 61
+word_count_full: 5926
+sentence_count_summary: 4
+sentence_count_full: 192
+input_token_count: 1024
+output_token_count: 72
+compression_rate: 1.13%
