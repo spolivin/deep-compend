@@ -1,0 +1,5 @@
+{
+    "report_name": "summary_report_t5_small.txt",
+    "model_path": "google-t5/t5-small",
+    "num_beams": 10
+}

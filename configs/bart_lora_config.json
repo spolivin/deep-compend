@@ -1,0 +1,6 @@
+{
+    "report_name": "summary_report_bart_lora.txt",
+    "model_path": "facebook/bart-large-cnn",
+    "lora_adapters_path": "spolivin/bart-arxiv-lora",
+    "repetition_penalty": 1.8
+}

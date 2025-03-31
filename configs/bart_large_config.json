@@ -1,0 +1,5 @@
+{
+    "report_name": "summary_report_bart_large.txt",
+    "model_path": "facebook/bart-large-cnn",
+    "repetition_penalty": 1.4
+}

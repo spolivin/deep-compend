@@ -1,0 +1,6 @@
+{
+    "report_name": "summary_report_t5_base.txt",
+    "model_path": "google-t5/t5-base",
+    "num_beams": 7,
+    "repetition_penalty": 2.0
+}
