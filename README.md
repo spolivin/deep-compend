@@ -9,7 +9,7 @@ Using [facebook/bart-large-cnn](https://huggingface.co/facebook/bart-large-cnn) 
 
 Before being able to run the summarization, one need to firstly create virtual environment and load [necessary packages](./requirements.txt):
 
-1. **Windows**
+* ***Windows***
 
 ```bash
 python -m venv ./.venv
@@ -17,11 +17,11 @@ python -m venv ./.venv
 pip install -r requirements.txt
 ```
 
-2. **Linux**
+* ***Linux***
 ```bash
 sudo apt-get update
-sudo apt-get install python3.10-venv
-python3.10 -m venv .venv
+sudo apt-get install python3.12-venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
@@ -148,26 +148,38 @@ python summarize.py articles/test1.pdf --config=configs/t5_small_config.json --n
 
 ## Example scripts
 
-I have prepared a few shell-scripts with [examples](./scripts/) of using the script in order to demonstrate how it can be used. One can run them in the following way for some test article. For instance, if we download [this article](https://arxiv.org/abs/1301.3781) and save it in `articles` folder:
+I have prepared a few shell-scripts with [examples](./scripts/) of using the script in order to demonstrate how it can be used. One can run them in the following way for some test article. I have prepared a script for automatic downloading of an article from ArXiv given its ID. For instance, we can load a paper with ID of `1301.3781`:
 
 ```bash
+# Loading paper from ArXiv and saving it in 'articles' folder
+python pull_arxiv_paper.py 1301.3781
+```
+
+Now we can run each of the below scripts one by one to test the library and different configurations:
+```bash
 # Using "facebook/bart-large-cnn"
-bash scripts/run_bart_large.sh articles/1301.3781v3.pdf
+bash scripts/run_bart_large.sh articles/1301.3781.pdf
 
 # Using "facebook/bart-large-cnn" with LoRA adapters
-bash scripts/run_bart_lora.sh articles/1301.3781v3.pdf
+bash scripts/run_bart_lora.sh articles/1301.3781.pdf
 
 # Using default settings
-bash scripts/run_default.sh articles/1301.3781v3.pdf
+bash scripts/run_default.sh articles/1301.3781.pdf
 
 # Using "google-t5/t5-base"
-bash scripts/run_t5_base.sh articles/1301.3781v3.pdf
+bash scripts/run_t5_base.sh articles/1301.3781.pdf
 
 # Using "google-t5/t5-small"
-bash scripts/run_t5_small.sh articles/1301.3781v3.pdf
+bash scripts/run_t5_small.sh articles/1301.3781.pdf
 
 # Using "google-t5/t5-base" with overridden arguments
-bash scripts/run_t5_small_override.sh articles/1301.3781v3.pdf
+bash scripts/run_t5_small_override.sh articles/1301.3781.pdf
 ```
 
 After running these commands, the respective summary reports with additional information and statistics will be generated and saved in `summaries` folder (by default).
+
+## Library limitations
+
+The main drawback of the library is that it works currently only with articles written in one column (rather than in two which is the case with many articles). The summary generation results can be drastically different (and potentially incoherent) if attempting to use the library on two-column articles.
+
+Another limitation consists in the way article sections are named. The library is written to retrieve text starting from "Introduction-like" sections until "References-like" sections to use the result as input to summary generation models. While the library is able to track the most common ways Introduction and References sections are usually named and thus retrieve text accordingly, sometimes these sections can have other names that can pose a problem for retrieving the text correctly.
