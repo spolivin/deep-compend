@@ -1,11 +1,11 @@
-=== Summarization Report 243A27 ===
+=== Summarization Report 2217EA ===
 
-Article path: 'articles/1301.3781v3.pdf'
+Article path: 'articles/1301.3781.pdf'
 Model: facebook/bart-large-cnn
 Tokenizer: facebook/bart-large-cnn
 Context window: 1024
 LoRA: None
-Gen time: 2025-03-31 12:18:28
+Gen time: 2025-04-06 17:39:08
 Keywords: ['word', 'words', 'model', 'vectors', 'training']
 
 -------------------------------------------------------------------------------------------------------

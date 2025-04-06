@@ -1,11 +1,11 @@
-=== Summarization Report 6B6064 ===
+=== Summarization Report 6DEBCB ===
 
-Article path: 'articles/1301.3781v3.pdf'
+Article path: 'articles/1301.3781.pdf'
 Model: google-t5/t5-small
 Tokenizer: google-t5/t5-small
 Context window: 512
 LoRA: None
-Gen time: 2025-03-31 12:25:03
+Gen time: 2025-04-06 17:42:37
 Keywords: ['word', 'words', 'model', 'vectors', 'training', 'models', 'data', 'nnlm', 'layer', 'gram']
 
 -------------------------------------------------------------------------------------------------------

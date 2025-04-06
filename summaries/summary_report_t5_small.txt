@@ -1,11 +1,11 @@
-=== Summarization Report A114C5 ===
+=== Summarization Report F9629A ===
 
-Article path: 'articles/1301.3781v3.pdf'
+Article path: 'articles/1301.3781.pdf'
 Model: google-t5/t5-small
 Tokenizer: google-t5/t5-small
 Context window: 512
 LoRA: None
-Gen time: 2025-03-31 12:24:16
+Gen time: 2025-04-06 17:42:12
 Keywords: ['word', 'words', 'model', 'vectors', 'training']
 
 -------------------------------------------------------------------------------------------------------
