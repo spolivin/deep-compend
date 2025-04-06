@@ -4,3 +4,4 @@ peft==0.15.0
 nltk==3.9.1
 pymupdf==1.25.4
 spacy==3.8.4
+arxiv==2.1.3
