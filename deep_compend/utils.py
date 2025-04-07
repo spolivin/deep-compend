@@ -1,7 +1,7 @@
 """Helpful functions for computing summary statistics."""
 
 
-def comression_ratio(summary: str, full_text: str) -> float:
+def compression_ratio(summary: str, full_text: str) -> float:
     """Computes the compression between summary text and full text.
 
     Args:

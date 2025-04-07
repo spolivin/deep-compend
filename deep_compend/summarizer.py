@@ -23,7 +23,7 @@ from transformers import (
 from .configs import SummaryGenerationConfig
 from .extractors import KeywordsExtractor, PDFExtractor
 from .text_preprocessing import prettify_summary
-from .utils import comression_ratio
+from .utils import compression_ratio
 
 warnings.filterwarnings("ignore")
 logging.set_verbosity_error()
@@ -219,7 +219,7 @@ class ArticleSummarizer:
             sentence_count_full=self.sentence_count_full,
             input_token_count=self.input_token_count,
             output_token_count=self.output_token_count,
-            compression_rate=f"{comression_ratio(self.summary, self.clean_text):.2%}",
+            compression_rate=f"{compression_ratio(self.summary, self.clean_text):.2%}",
         )
 
     class SummaryReportGenerator:
