@@ -23,6 +23,7 @@ Arguments:
     --lora-adapters-path (str, optional): Path to LoRA adapters
     --line-width (int, optional): Maximum line width for report formatting.
     --max-keywords-num (int, optional): Maximum number of keywords in the summary report.
+    --min-keywords-length (int, optional): Minimum length of keywords to consider in the summary report.
     --report-name (str, optional): Name of the output summary report.
     --save-folder (str, optional): Folder to save the generated summary.
 """
@@ -47,6 +48,7 @@ BUILT_IN_DEFAULTS = {
     "max_keywords_num": 5,
     "report_name": "summary_report.txt",
     "save_folder": "summaries",
+    "min_keywords_length": 3,
 }
 
 
@@ -151,6 +153,12 @@ parser.add_argument(
     help="Maximum number of keywords in the summary report",
 )
 parser.add_argument(
+    "-mkl",
+    "--min-keywords-length",
+    type=int,
+    help="Minimum length of keywords to consider in the summary report",
+)
+parser.add_argument(
     "-rn",
     "--report-name",
     type=str,
@@ -199,7 +207,7 @@ if __name__ == "__main__":
 
     # Instantiating an object for summarization
     print("Loading tokenizer and model for summarization...")
-    arxiv_summarizer = ArticleSummarizer(
+    article_summarizer = ArticleSummarizer(
         model_path=final_config["model_path"],
         tokenizer_path=final_config["tokenizer_path"],
     )
@@ -208,22 +216,23 @@ if __name__ == "__main__":
     print("Tokenizer and model loaded")
     if final_config.get("lora_adapters_path"):
         print("Attaching LoRA adapters...")
-        arxiv_summarizer.load_lora_adapters(
+        article_summarizer.load_lora_adapters(
             lora_adapters_path=final_config["lora_adapters_path"]
         )
         print("LoRA adapters attached")
 
     # Generating summary of the text
     print("Running summarization...")
-    summary = arxiv_summarizer.summarize_text(
+    summary = article_summarizer.summarize(
         pdf_path=final_config["filepath"], config=summ_config
     )
 
     # Generating a summary report
     print("Generating report...")
-    arxiv_summarizer.generate_summary_report(
+    article_summarizer.generate_summary_report(
         filename=final_config["report_name"],
         linewidth=final_config["line_width"],
         kwrds_num=final_config["max_keywords_num"],
         save_folder=final_config["save_folder"],
+        min_kwrd_length=final_config["min_keywords_length"],
     )
