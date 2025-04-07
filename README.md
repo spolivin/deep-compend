@@ -69,7 +69,7 @@ We can now specify the path to the article we need to summarize and can easily g
 
 ```python
 # Generating summary
-generated_summary = summarizer.summarize_text(
+generated_summary = summarizer.summarize(
   pdf_path="articles/test1.pdf", config=summ_config,
 )
 ```
@@ -93,7 +93,7 @@ $ python summarize.py --help
 usage: summarize.py [-h] [-c CONFIG] [-mp MODEL_PATH] [-tp TOKENIZER_PATH] [-mxot MAX_OUTPUT_TOKENS]
                     [-mnot MIN_OUTPUT_TOKENS] [-nb NUM_BEAMS] [-lp LENGTH_PENALTY] [-rp REPETITION_PENALTY]
                     [-nrns NO_REPEAT_NGRAM_SIZE] [-lap LORA_ADAPTERS_PATH] [-lw LINE_WIDTH] [-mkn MAX_KEYWORDS_NUM]
-                    [-rn REPORT_NAME] [-sf SAVE_FOLDER]
+                    [-mkl MIN_KEYWORDS_LENGTH] [-rn REPORT_NAME] [-sf SAVE_FOLDER]
                     filepath
 
 Summarize a PDF article using a Hugging Face model.
@@ -101,7 +101,7 @@ Summarize a PDF article using a Hugging Face model.
 positional arguments:
   filepath              Path to the PDF article to be summarized
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -c CONFIG, --config CONFIG
                         Path to the config JSON file
@@ -127,6 +127,8 @@ optional arguments:
                         Maximum line width for report formatting
   -mkn MAX_KEYWORDS_NUM, --max-keywords-num MAX_KEYWORDS_NUM
                         Maximum number of keywords in the summary report
+  -mkl MIN_KEYWORDS_LENGTH, --min-keywords-length MIN_KEYWORDS_LENGTH
+                        Minimum length of keywords to consider in the summary report
   -rn REPORT_NAME, --report-name REPORT_NAME
                         Name of the output summary report
   -sf SAVE_FOLDER, --save-folder SAVE_FOLDER
@@ -140,7 +142,7 @@ There are two ways that one can specify arguments for the script:
 
 * CLI arguments.
 
-The script is programmed in such a way that when specifying both config and CLI arguments, argument with the same name in config and cli will be overridden with the value specified in CLI. For instance, after using this command, the `num_beams` argument will be overridden with the value of 5:
+The script is programmed in such a way that when specifying both config and CLI arguments, argument with the same name in config and CLI will be overridden with the value specified in CLI. For instance, after using this command, the `num_beams` argument will be overridden with the value of 5:
 
 ```bash
 python summarize.py articles/test1.pdf --config=configs/t5_small_config.json --num-beams=5
@@ -148,7 +150,7 @@ python summarize.py articles/test1.pdf --config=configs/t5_small_config.json --n
 
 ## Example scripts
 
-I have prepared a few shell-scripts with [examples](./scripts/) of using the script in order to demonstrate how it can be used. One can run them in the following way for some test article. I have prepared a script for automatic downloading of an article from ArXiv given its ID. For instance, we can load a paper with ID of `1301.3781`:
+I have prepared a few shell-scripts with [examples](./scripts/) of using the script in order to demonstrate how it can be used. One can run them in the following way for some test article. I have prepared a script for automatic downloading of an article from ArXiv given its ID. For instance, we can load [a paper](https://arxiv.org/abs/1301.3781) with ID of `1301.3781`:
 
 ```bash
 # Loading paper from ArXiv and saving it in 'articles' folder
