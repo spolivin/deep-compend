@@ -117,7 +117,7 @@ class ArticleSummarizer:
             else safe_default_value
         )
 
-    def summarize_text(
+    def summarize(
         self, pdf_path: str, config: Optional[SummaryGenerationConfig] = None
     ) -> str:
         """Summarizes the text from PDF-article.
@@ -240,6 +240,9 @@ class ArticleSummarizer:
             save_folder: str = "summaries",
             kwrds_num: int = 5,
             linewidth: int = 100,
+            lm: str = "en_core_web_sm",
+            min_kwrd_length: int = 3,
+            most_common_elems: int = 20,
         ):
             """Initializes a SummaryReportGenerator instance.
 
@@ -248,13 +251,20 @@ class ArticleSummarizer:
                 save_folder (str, optional): Name of a folder where to save the report. Defaults to "summaries".
                 kwrds_num (int, optional): Number of keywords to include into the report. Defaults to 5.
                 linewidth (int, optional): Max line width in the report. Defaults to 100.
+                lm (str, optional): Name of a language model to be used for keyword extraction. Defaults to "en_core_web_sm".
+                min_kwrds_length (int, optional): Minimal length of keyword to include. Defaults to 3.
+                most_common_elems (int, optional): Number of the most frequent words to consider. Defaults to 20.
             """
             self.summarizer: ArticleSummarizer = summarizer
             self.save_folder = save_folder
             self.kwrds_num = kwrds_num
             self.linewidth = linewidth
             self.statistics: dict[str, Any] = summarizer._get_stats().__dict__
-            self.keywords_extractor = KeywordsExtractor()
+            self.keywords_extractor = KeywordsExtractor(
+                lm=lm,
+                min_kwrd_length=min_kwrd_length,
+                most_common_elems=most_common_elems,
+            )
 
         def _generate_filepath(self, filename: str) -> Path:
             """Creates a Path object to the file for the report.
@@ -336,6 +346,9 @@ class ArticleSummarizer:
         save_folder: str = "summaries",
         linewidth: int = 100,
         kwrds_num: int = 5,
+        lm: str = "en_core_web_sm",
+        min_kwrd_length: int = 3,
+        most_common_elems: int = 20,
     ) -> None:
         """Generates a summary report.
 
@@ -344,6 +357,9 @@ class ArticleSummarizer:
             save_folder (str, optional): Folder where to save a report. Defaults to "summaries".
             linewidth (int, optional): Max width of a line in a report. Defaults to 100.
             kwrds_num (int, optional): Number of keywords to show in report. Defaults to 5.
+            lm (str, optional): Name of a language model to be used for keyword extraction. Defaults to "en_core_web_sm".
+            min_kwrds_length (int, optional): Minimal length of keyword to include. Defaults to 3.
+            most_common_elems (int, optional): Number of the most frequent words to consider. Defaults to 20.
 
         Raises:
             ValueError: Exception raised if extension file in `filename` is not "txt".
@@ -358,5 +374,8 @@ class ArticleSummarizer:
             linewidth=linewidth,
             kwrds_num=kwrds_num,
             save_folder=save_folder,
+            lm=lm,
+            min_kwrd_length=min_kwrd_length,
+            most_common_elems=most_common_elems,
         )
         report_generator.generate_txt_report(filename=filename)
