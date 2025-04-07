@@ -1,12 +1,12 @@
-=== Summarization Report 804104 ===
+=== Summarization Report 648314 ===
 
 Article path: 'articles/1301.3781.pdf'
 Model: facebook/bart-large-cnn
 Tokenizer: facebook/bart-large-cnn
 Context window: 1024
 LoRA: spolivin/bart-arxiv-lora
-Gen time: 2025-04-06 17:40:10
-Keywords: ['word', 'words', 'model', 'vectors', 'training']
+Gen time: 2025-04-07 20:26:08
+Keywords: ['words', 'model', 'vectors', 'training', 'models', 'layer', 'accuracy']
 
 -------------------------------------------------------------------------------------------------------
 We develop new techniques for learning highquality word vectors from huge data sets with billions of

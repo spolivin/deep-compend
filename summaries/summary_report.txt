@@ -1,12 +1,12 @@
-=== Summarization Report AA1662 ===
+=== Summarization Report 221711 ===
 
 Article path: 'articles/1301.3781.pdf'
 Model: google-t5/t5-small
 Tokenizer: google-t5/t5-small
 Context window: 512
 LoRA: None
-Gen time: 2025-04-06 17:40:55
-Keywords: ['word', 'words', 'model', 'vectors', 'training']
+Gen time: 2025-04-07 20:24:17
+Keywords: ['vectors', 'training', 'accuracy', 'example', 'architecture', 'projection']
 
 -------------------------------------------------------------------------------------------------------
 Simple models trained on huge amounts of data outperform complex systems trained on less data. But
