@@ -1,11 +1,11 @@
-=== Summarization Report 17B678 ===
+=== Summarization Report 261467 ===
 
 Article path: 'articles/1301.3781.pdf'
 Model: google-t5/t5-base
 Tokenizer: google-t5/t5-base
 Context window: 1024
 LoRA: None
-Gen time: 2025-04-06 17:41:41
+Gen time: 2025-04-10 19:02:51
 Keywords: ['word', 'words', 'model', 'vectors', 'training']
 
 -------------------------------------------------------------------------------------------------------

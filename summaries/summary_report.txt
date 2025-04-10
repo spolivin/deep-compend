@@ -1,11 +1,11 @@
-=== Summarization Report 221711 ===
+=== Summarization Report C4C617 ===
 
 Article path: 'articles/1301.3781.pdf'
 Model: google-t5/t5-small
 Tokenizer: google-t5/t5-small
 Context window: 512
 LoRA: None
-Gen time: 2025-04-07 20:24:17
+Gen time: 2025-04-10 19:01:48
 Keywords: ['vectors', 'training', 'accuracy', 'example', 'architecture', 'projection']
 
 -------------------------------------------------------------------------------------------------------

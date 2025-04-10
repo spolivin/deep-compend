@@ -1,11 +1,11 @@
-=== Summarization Report 2217EA ===
+=== Summarization Report FB75E1 ===
 
 Article path: 'articles/1301.3781.pdf'
 Model: facebook/bart-large-cnn
 Tokenizer: facebook/bart-large-cnn
 Context window: 1024
 LoRA: None
-Gen time: 2025-04-06 17:39:08
+Gen time: 2025-04-10 19:00:29
 Keywords: ['word', 'words', 'model', 'vectors', 'training']
 
 -------------------------------------------------------------------------------------------------------

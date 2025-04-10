@@ -1,11 +1,11 @@
-=== Summarization Report 648314 ===
+=== Summarization Report 795F8F ===
 
 Article path: 'articles/1301.3781.pdf'
 Model: facebook/bart-large-cnn
 Tokenizer: facebook/bart-large-cnn
 Context window: 1024
 LoRA: spolivin/bart-arxiv-lora
-Gen time: 2025-04-07 20:26:08
+Gen time: 2025-04-10 19:01:20
 Keywords: ['words', 'model', 'vectors', 'training', 'models', 'layer', 'accuracy']
 
 -------------------------------------------------------------------------------------------------------
