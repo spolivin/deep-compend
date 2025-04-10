@@ -1,20 +1,22 @@
 # ***DeepCompend***
 
-The purpose of this repository is to provide access to Python API for easy generation of summaries of scientific articles for quicker
-and easier understanding. Initially planned as a repo solely for summary generation using [the model I fune-tuned](https://huggingface.co/spolivin/bart-arxiv-lora), I have re-purposed the repository and thus written a small Python library called `deep-compend` capable of using any *Hugging Face* summarization model for quick generation of summaries of articles in TXT-format (for now).
+ *DeepCompend* is a Python library capable of using any *Hugging Face* summarization model for quick generation of summaries of scientific articles in TXT-format.
 
-Using [facebook/bart-large-cnn](https://huggingface.co/facebook/bart-large-cnn) as a base model, I have fine-tuned it with *LoRA* on [ccdv/arxiv-summarization](https://huggingface.co/datasets/ccdv/arxiv-summarization) dataset with multiple examples of article texts taken from *Arxiv*. Hence, this fine-tuned model can serve as a good way to generate summaries of articles from *Arxiv*.
+## Installation
 
-## Preparing virtual environment
+Firstly, we clone the repository:
 
-Before being able to run the summarization, one need to firstly create virtual environment and load [necessary packages](./requirements.txt):
+```bash
+git clone https://github.com/spolivin/deep-compend.git
+```
+
+Next, we need to create and activate the virtual environment:
 
 * ***Windows***
 
 ```bash
 python -m venv ./.venv
 .venv\Scripts\activate.bat
-pip install -r requirements.txt
 ```
 
 * ***Linux***
@@ -23,23 +25,27 @@ sudo apt-get update
 sudo apt-get install python3.12-venv
 python3.12 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
 ```
 
-Since the library makes use of *Spacy*'s language models, it is also necessary to install some model, for instance, `en_core_web_sm`:
+Lastly, we install the library in editable mode:
+
 ```bash
+pip install setuptools wheel
+pip install -e .
+```
+
+Since the library makes use of *Spacy*'s language models for important words extraction, it is also necessary to install some model, for instance, `en_core_web_sm`:
+```bash
+# Windows
 python -m spacy download en_core_web_sm
+
+# Linux
+python3.12 -m spacy download en_core_web_sm
 ```
 
 ## Python API
 
-Currently the library exists as [a folder](./deep_compend/) on GitHub so one should first clone the repository:
-
-```bash
-git clone https://github.com/spolivin/deep-compend.git
-```
-
-Next, we can get right on to summarization. Suppose, we have a test article located on `articles/test1.pdf`. Hence, we do the following. Firstly, we import necessary classes for summarization:
+Suppose, we have a test article located on `articles/test1.pdf`. Hence, we do the following. Firstly, we import necessary classes for summarization:
 
 ```python
 from deep_compend import ArticleSummarizer, SummaryGenerationConfig
@@ -69,9 +75,7 @@ We can now specify the path to the article we need to summarize and can easily g
 
 ```python
 # Generating summary
-generated_summary = summarizer.summarize(
-  pdf_path="articles/test1.pdf", config=summ_config,
-)
+generated_summary = summarizer.summarize(pdf_path="articles/test1.pdf", config=summ_config)
 ```
 
 The text in `generated_summary` now contains the summary of the article from `articles/test1.pdf`. Lastly, we generate the report:
@@ -83,14 +87,14 @@ summarizer.generate_summary_report("summary_report.txt")
 After successful generation, one will see a message mentioning where summary has been saved (by default summary is saved in a txt-file in `summaries` folder created if non-existent).
 
 
-## Summarization using one command
+## Command Line Interface (CLI)
 
-In order to make the library useful, I came up with [the script](./summarize.py) that can be used to generate summaries using one command. It has the following arguments:
+In order to make the library useful, after library installation a user has access to `deep-compend` command for launching summarization:
 
 ```
-$ python summarize.py --help
+$ deep-compend --help
 
-usage: summarize.py [-h] [-c CONFIG] [-mp MODEL_PATH] [-tp TOKENIZER_PATH] [-mxot MAX_OUTPUT_TOKENS]
+usage: deep-compend [-h] [-c CONFIG] [-mp MODEL_PATH] [-tp TOKENIZER_PATH] [-mxot MAX_OUTPUT_TOKENS]
                     [-mnot MIN_OUTPUT_TOKENS] [-nb NUM_BEAMS] [-lp LENGTH_PENALTY] [-rp REPETITION_PENALTY]
                     [-nrns NO_REPEAT_NGRAM_SIZE] [-lap LORA_ADAPTERS_PATH] [-lw LINE_WIDTH] [-mkn MAX_KEYWORDS_NUM]
                     [-mkl MIN_KEYWORDS_LENGTH] [-rn REPORT_NAME] [-sf SAVE_FOLDER]
@@ -145,7 +149,7 @@ There are two ways that one can specify arguments for the script:
 The script is programmed in such a way that when specifying both config and CLI arguments, argument with the same name in config and CLI will be overridden with the value specified in CLI. For instance, after using this command, the `num_beams` argument will be overridden with the value of 5:
 
 ```bash
-python summarize.py articles/test1.pdf --config=configs/t5_small_config.json --num-beams=5
+deep-compend articles/test1.pdf --config=configs/t5_small_config.json --num-beams=5
 ```
 
 ## Example scripts
