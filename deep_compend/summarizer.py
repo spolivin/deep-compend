@@ -35,6 +35,7 @@ class ArticleSummarizer:
     """Generates a summary of an input PDF-article.
 
     Attributes:
+        device (torch.device): Device to run summarization model on.
         model_path (str): Path to the HF's Transformer model.
         tokenizer_path (Optional[str]): Path to HF's Transformer tokenizer.
         model (PreTrainedModel): Transformers' pretrained model.
@@ -58,17 +59,25 @@ class ArticleSummarizer:
         self,
         model_path: str,
         tokenizer_path: Optional[str] = None,
+        run_on: str = "auto",
     ):
         """Initializes an ArticleSummarizer instance.
 
         Args:
             model_path (str): Path to the Transformer model.
             tokenizer_path (Optional[str], optional): Path to Transformer tokenizer. Defaults to None.
+            run_on (str): Type of device to run summarization model on. Defaults to "auto".
         """
+        # Defining the device to run summarization model on
+        self.device: torch.device = (
+            torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            if run_on == "auto"
+            else torch.device(run_on)
+        )
         self.model_path = model_path
         self.model: PreTrainedModel = AutoModelForSeq2SeqLM.from_pretrained(
             self.model_path
-        )
+        ).to(self.device)
         self.config: PretrainedConfig = self.model.config
         # If tokenizer path is not specified, loading specified model's tokenizer
         self.tokenizer_path = (
@@ -153,7 +162,7 @@ class ArticleSummarizer:
             return_tensors="pt",
             truncation=True,
             max_length=self.context_window,
-        )
+        ).to(self.device)
 
         # Computing number of tokens for the input tokenized sequence
         self.input_token_count = len(inputs["input_ids"][0])
