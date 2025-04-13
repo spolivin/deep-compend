@@ -42,6 +42,7 @@ python -m spacy download en_core_web_sm
 # Linux
 python3.12 -m spacy download en_core_web_sm
 ```
+> One can of course opt for loading other Spacy's language models: `en_core_web_md` or `en_core_web_lg`
 
 ## Python API
 
@@ -60,8 +61,8 @@ Next, we instantiate objects for these two classes. For instance, if we want to 
 # Specifying the config for summary generation (given with default values)
 summ_config = SummaryGenerationConfig()
 
-# Instantiating a Summarizer object
-summarizer = ArticleSummarizer(model_path="facebook/bart-large-cnn")
+# Instantiating a Summarizer object with specifying the device
+summarizer = ArticleSummarizer(model_path="facebook/bart-large-cnn", run_on="cuda")
 ```
 
 We can optionally attach LoRA adapters compatible with the model we used in `model_path`:
@@ -89,18 +90,45 @@ After successful generation, one will see a message mentioning where summary has
 
 ## Command Line Interface (CLI)
 
-In order to make the library useful, after library installation a user has access to `deep-compend` command for launching summarization:
+In order to make the library useful, after library installation a user has access to `deep-compend` command for launching summarization. This CLI command is equipped with the following sub-commands that extends the analysis of an article to be summarized:
 
-```
+```bash
 $ deep-compend --help
 
-usage: deep-compend [-h] [-c CONFIG] [-mp MODEL_PATH] [-tp TOKENIZER_PATH] [-mxot MAX_OUTPUT_TOKENS]
-                    [-mnot MIN_OUTPUT_TOKENS] [-nb NUM_BEAMS] [-lp LENGTH_PENALTY] [-rp REPETITION_PENALTY]
-                    [-nrns NO_REPEAT_NGRAM_SIZE] [-lap LORA_ADAPTERS_PATH] [-lw LINE_WIDTH] [-mkn MAX_KEYWORDS_NUM]
-                    [-mkl MIN_KEYWORDS_LENGTH] [-rn REPORT_NAME] [-sf SAVE_FOLDER]
-                    filepath
+usage: deep-compend [-h] {summarize,extract-text,extract-keywords} ...
 
-Summarize a PDF article using a Hugging Face model.
+Article summarization tool
+
+positional arguments:
+  {summarize,extract-text,extract-keywords}
+    summarize           Summarizes a PDF article using a Hugging Face model
+    extract-text        Extracts text from article
+    extract-keywords    Extracts keywords from article
+
+options:
+  -h, --help            show this help message and exit
+```
+
+* `summarize`
+
+This subcommand launches the process of summarization and report generation like so for instance:
+
+```bash
+deep-compend summarize articles/test1.pdf --config=configs/config.json
+```
+> More examples of using this subcommand can be consulted [here](./scripts/).
+
+Other CLI arguments for this command are as follows:
+
+```bash
+$ deep-compend summarize --help
+
+usage: deep-compend summarize [-h] [-c CONFIG] [-mp MODEL_PATH] [-tp TOKENIZER_PATH] [-mxot MAX_OUTPUT_TOKENS] [-mnot MIN_OUTPUT_TOKENS] [-nb NUM_BEAMS]
+                              [-lp LENGTH_PENALTY] [-rp REPETITION_PENALTY] [-nrns NO_REPEAT_NGRAM_SIZE] [-lap LORA_ADAPTERS_PATH] [-lw LINE_WIDTH]
+                              [-mkn MAX_KEYWORDS_NUM] [-mkl MIN_KEYWORDS_LENGTH] [-rn REPORT_NAME] [-sf SAVE_FOLDER] [-slm SPACY_LANG_MODEL]
+                              filepath
+
+Summarizes a PDF article using a Hugging Face model
 
 positional arguments:
   filepath              Path to the PDF article to be summarized
@@ -137,7 +165,28 @@ options:
                         Name of the output summary report
   -sf SAVE_FOLDER, --save-folder SAVE_FOLDER
                         Folder to save the generated summary
+  -slm SPACY_LANG_MODEL, --spacy-lang-model SPACY_LANG_MODEL
+                        Name of Spacy language model to be used for keyword extraction
 ```
+
+* `extract-text`
+
+This subcommand enable seeing before running the summarization the preprocessed input article text that goes as input to the model specified for the summarization. In other words, the retrieved article text starting from the Introduction and ending before References:
+
+```bash
+deep-compend extract-text articles/test1.pdf
+```
+> Command can be useful for understanding whether the text was retrieved correctly and allows for analyzing the input before actually running any models
+
+* `extract-keywords`
+
+This subcommand retrieved the keywords from the article using *Spacy*'s language models and can be useful for getting the general insight into what the paper is about:
+
+```bash
+deep-compend extract-keywords articles/test1.pdf --spacy-lang-model=en_core_web_lg --max-keywords-num=10 --min-keywords-length=7
+```
+> Command allows specifying the language model to use for extraction (`--spacy-lang-model`), maximum number of keywords to show (`--max-keywords-num`) and what minimum keyword length to consider (`--min-keywords-length`).
+
 
 ## Overriding arguments
 There are two ways that one can specify arguments for the script:
@@ -146,46 +195,44 @@ There are two ways that one can specify arguments for the script:
 
 * CLI arguments.
 
-The script is programmed in such a way that when specifying both config and CLI arguments, argument with the same name in config and CLI will be overridden with the value specified in CLI. For instance, after using this command, the `num_beams` argument will be overridden with the value of 5:
+The script is programmed in such a way that when specifying both config and CLI arguments, argument with the same name in config and CLI will be overridden with the value specified in CLI. For instance, after using this command, the `--num-beams` argument will be overridden with the value of 5:
 
 ```bash
-deep-compend articles/test1.pdf --config=configs/t5_small_config.json --num-beams=5
+deep-compend summarize articles/test1.pdf --config=configs/t5_small_config.json --num-beams=5
 ```
 
 ## Example scripts
 
-I have prepared a few shell-scripts with [examples](./scripts/) of using the script in order to demonstrate how it can be used. One can run them in the following way for some test article. I have prepared a script for automatic downloading of an article from ArXiv given its ID. For instance, we can load [a paper](https://arxiv.org/abs/1301.3781) with ID of `1301.3781`:
+I have prepared a few shell-scripts with [examples](./scripts/) of using the script for summarization in order to demonstrate how it can be used. One can run them in the following way for some test article. I have prepared a script for automatic downloading of an article from ArXiv given its ID. For instance, we can load a famous [*Deep Residual Learning for Image Recognition*](https://arxiv.org/abs/1512.03385) paper which has the ArXiv ID of `1512.03385`:
 
 ```bash
 # Loading paper from ArXiv and saving it in 'articles' folder
-python pull_arxiv_paper.py 1301.3781
+python pull_arxiv_paper.py 1512.03385
 ```
 
-Now we can run each of the below scripts one by one to test the library and different configurations:
+Now we can run each of the below scripts one by one to test the CLI and different configurations:
 ```bash
 # Using "facebook/bart-large-cnn"
-bash scripts/run_bart_large.sh articles/1301.3781.pdf
+bash scripts/run_bart_large.sh articles/1512.03385.pdf
 
 # Using "facebook/bart-large-cnn" with LoRA adapters
-bash scripts/run_bart_lora.sh articles/1301.3781.pdf
+bash scripts/run_bart_lora.sh articles/1512.03385.pdf
 
 # Using default settings
-bash scripts/run_default.sh articles/1301.3781.pdf
+bash scripts/run_default.sh articles/1512.03385.pdf
 
 # Using "google-t5/t5-base"
-bash scripts/run_t5_base.sh articles/1301.3781.pdf
+bash scripts/run_t5_base.sh articles/1512.03385.pdf
 
 # Using "google-t5/t5-small"
-bash scripts/run_t5_small.sh articles/1301.3781.pdf
+bash scripts/run_t5_small.sh articles/1512.03385.pdf
 
 # Using "google-t5/t5-base" with overridden arguments
-bash scripts/run_t5_small_override.sh articles/1301.3781.pdf
+bash scripts/run_t5_small_override.sh articles/1512.03385.pdf
 ```
 
 After running these commands, the respective summary reports with additional information and statistics will be generated and saved in `summaries` folder (by default).
 
 ## Library limitations
 
-The main drawback of the library is that it works currently only with articles written in one column (rather than in two which is the case with many articles). The summary generation results can be drastically different (and potentially incoherent) if attempting to use the library on two-column articles.
-
-Another limitation consists in the way article sections are named. The library is written to retrieve text starting from "Introduction-like" sections until "References-like" sections to use the result as input to summary generation models. While the library is able to track the most common ways Introduction and References sections are usually named and thus retrieve text accordingly, sometimes these sections can have other names that can pose a problem for retrieving the text correctly.
+The main limitation consists in the way article sections are named. The library is written to retrieve text starting from "Introduction-like" sections until "References-like" sections to use the result as input to summary generation models. While the library is able to track the most common ways Introduction and References sections are usually named and thus retrieve text accordingly, sometimes these sections can have other names that can pose a problem for retrieving the text correctly.
