@@ -1,26 +1,27 @@
-=== Summarization Report FB75E1 ===
+=== Summarization Report 82EB43 ===
 
-Article path: 'articles/1301.3781.pdf'
+Article path: 'articles/1512.03385.pdf'
 Model: facebook/bart-large-cnn
 Tokenizer: facebook/bart-large-cnn
 Context window: 1024
 LoRA: None
-Gen time: 2025-04-10 19:00:29
-Keywords: ['word', 'words', 'model', 'vectors', 'training']
+Gen time: 2025-04-13 09:27:39
+Keywords: ['layer', 'conv', 'layers', 'fig', 'imagenet']
 
 -------------------------------------------------------------------------------------------------------
-Simple nlp techniques are at their limits in many tasks. In machine translation, the existing
-corpora for many languages contain only a few billions of words or less. We use recently proposed
-techniques for measuring the quality of the resulting vector representations. We design a new
-comprehensive test set for measuring both syntactic and semantic regularities.
+Deep convolutional neural networks have led to a series of breakthroughs for image classiﬁcation.
+With the network depth increasing, accuracy gets saturated and then degrades rapidly. There exists a
+solution by construction to the deeper model: the added layers are identity mapping, and the other
+layers are copied from the learned shallower model. We present comprehensive experiments on imagenet
+to show the degradation problem and evaluate our method.
 -------------------------------------------------------------------------------------------------------
 
 Statistics:
 ----------
-word_count_summary: 61
-word_count_full: 5926
+word_count_summary: 75
+word_count_full: 7161
 sentence_count_summary: 4
-sentence_count_full: 192
+sentence_count_full: 382
 input_token_count: 1024
-output_token_count: 72
-compression_rate: 1.13%
+output_token_count: 95
+compression_rate: 1.28%

@@ -1,28 +1,29 @@
-=== Summarization Report 795F8F ===
+=== Summarization Report 420C37 ===
 
-Article path: 'articles/1301.3781.pdf'
+Article path: 'articles/1512.03385.pdf'
 Model: facebook/bart-large-cnn
 Tokenizer: facebook/bart-large-cnn
 Context window: 1024
 LoRA: spolivin/bart-arxiv-lora
-Gen time: 2025-04-10 19:01:20
-Keywords: ['words', 'model', 'vectors', 'training', 'models', 'layer', 'accuracy']
+Gen time: 2025-04-13 09:28:24
+Keywords: ['layer', 'layers', 'imagenet', 'error', 'table', 'training', 'identity']
 
 -------------------------------------------------------------------------------------------------------
-We develop new techniques for learning highquality word vectors from huge data sets with billions of
-words, and with millions of words in the vocabulary. We use recently proposed techniques for
-measuring the quality of the resulting vector representations, with the expectation that not only
-will similar words tend to be close to each other, but that words can have multiple degrees of
-similarity. We design a new comprehensive test set for measuring both syntactic and semantic
-regularities, and show that many such regularities can be learned with high accuracy.
+Deep convolutional neural networks have led to a series of breakthroughs in the field of image
+classiﬁcation. The leading results on the challenging imagenet dataset all exploit “very deep’
+models, with a depth of sixteen to thirty layers or more. When deeper networks are able to start
+converging, a degradation problem has been exposed: with the network depth increasing, accuracy gets
+saturated (which might be unsurprising) and then degrades rapidly. In this paper, we address the
+degradation problem by introducing a deep residual learning framework that explicitly lets these
+layers ﬁt a residual mapping.
 -------------------------------------------------------------------------------------------------------
 
 Statistics:
 ----------
-word_count_summary: 97
-word_count_full: 5926
-sentence_count_summary: 3
-sentence_count_full: 192
+word_count_summary: 107
+word_count_full: 7161
+sentence_count_summary: 4
+sentence_count_full: 382
 input_token_count: 1024
-output_token_count: 112
-compression_rate: 1.75%
+output_token_count: 172
+compression_rate: 1.72%

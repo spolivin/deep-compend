@@ -1,25 +1,26 @@
-=== Summarization Report C4C617 ===
+=== Summarization Report 9FFE7D ===
 
-Article path: 'articles/1301.3781.pdf'
+Article path: 'articles/1512.03385.pdf'
 Model: google-t5/t5-small
 Tokenizer: google-t5/t5-small
 Context window: 512
 LoRA: None
-Gen time: 2025-04-10 19:01:48
-Keywords: ['vectors', 'training', 'accuracy', 'example', 'architecture', 'projection']
+Gen time: 2025-04-13 09:28:48
+Keywords: ['imagenet', 'training', 'identity', 'resnets', 'network', 'shortcuts', 'networks', 'mapping']
 
 -------------------------------------------------------------------------------------------------------
-Simple models trained on huge amounts of data outperform complex systems trained on less data. But
-the simple techniques are at their limits in many tasks. For example, the amount of relevant
-indomain data for automatic speech recognition is limited.
+Deep convolutional neural networks have led to a series of breakthroughs for image classification.
+Deep networks naturally integrate low/mid/highlevel features and classifiers in an endto-end
+multilayer fashion. The leading results on the challenging imagenet dataset exploit “very deep”
+models, with a depth of sixteen to thirty.
 -------------------------------------------------------------------------------------------------------
 
 Statistics:
 ----------
-word_count_summary: 44
-word_count_full: 5926
+word_count_summary: 52
+word_count_full: 7161
 sentence_count_summary: 3
-sentence_count_full: 192
+sentence_count_full: 382
 input_token_count: 512
-output_token_count: 54
-compression_rate: 0.77%
+output_token_count: 77
+compression_rate: 0.93%
