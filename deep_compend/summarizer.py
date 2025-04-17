@@ -27,7 +27,6 @@ from .utils import compression_ratio
 
 warnings.filterwarnings("ignore")
 logging.set_verbosity_error()
-nltk.download("punkt_tab", quiet=True)
 nltk.download("punkt", quiet=True)
 
 
