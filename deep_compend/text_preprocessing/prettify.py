@@ -18,19 +18,11 @@ def prettify_summary(summary: str) -> str:
     prettified_summary = " ".join(s.capitalize() for s in sentences)
     # Removing unwanted spaces before punctuation
     prettified_summary = re.sub(r"\s+([.,!?])", r"\1", prettified_summary)
-    # Fixing word shift problems: e.g. regul -ation
+    # Fixing word shift problems: e.g. regul- ation
     prettified_summary = re.sub(
         r"(\w+)-\s*\n*\s*(\w+)", r"\1\2", prettified_summary
     )
     # Removing numbers after words: e.g. regularities1
     prettified_summary = re.sub(r"(\w+)\d+", r"\1", prettified_summary)
-    # Fixing issue of extra period after comma: (y,...,.Ym) -> (y,...,Ym)
-    prettified_summary = re.sub(r"\.\.\.,\.", "...,", prettified_summary)
-    # Fixing capitalization within parentheses: (y,...,Ym) -> (y,...,ym)
-    prettified_summary = re.sub(
-        r"\(([^)]*?)\b([A-Z])",
-        lambda m: f"({m.group(1)}{m.group(2).lower()}",
-        prettified_summary,
-    )
 
     return prettified_summary
