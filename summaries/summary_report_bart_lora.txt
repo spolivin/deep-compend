@@ -1,11 +1,11 @@
-=== Summarization Report 420C37 ===
+=== Summarization Report B906A8 ===
 
 Article path: 'articles/1512.03385.pdf'
 Model: facebook/bart-large-cnn
 Tokenizer: facebook/bart-large-cnn
 Context window: 1024
 LoRA: spolivin/bart-arxiv-lora
-Gen time: 2025-04-13 09:28:24
+Gen time: 2025-04-17 18:49:50
 Keywords: ['layer', 'layers', 'imagenet', 'error', 'table', 'training', 'identity']
 
 -------------------------------------------------------------------------------------------------------

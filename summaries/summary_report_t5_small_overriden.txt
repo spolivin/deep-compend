@@ -1,11 +1,11 @@
-=== Summarization Report 04B596 ===
+=== Summarization Report 9822F1 ===
 
 Article path: 'articles/1512.03385.pdf'
 Model: google-t5/t5-small
 Tokenizer: google-t5/t5-small
 Context window: 512
 LoRA: None
-Gen time: 2025-04-13 09:30:55
+Gen time: 2025-04-17 18:52:09
 Keywords: ['layer', 'conv', 'layers', 'fig', 'imagenet', 'error', 'table', 'training', 'identity', 'resnets']
 
 -------------------------------------------------------------------------------------------------------

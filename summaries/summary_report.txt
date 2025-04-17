@@ -1,11 +1,11 @@
-=== Summarization Report 9FFE7D ===
+=== Summarization Report 89E5B3 ===
 
 Article path: 'articles/1512.03385.pdf'
 Model: google-t5/t5-small
 Tokenizer: google-t5/t5-small
 Context window: 512
 LoRA: None
-Gen time: 2025-04-13 09:28:48
+Gen time: 2025-04-17 18:50:50
 Keywords: ['imagenet', 'training', 'identity', 'resnets', 'network', 'shortcuts', 'networks', 'mapping']
 
 -------------------------------------------------------------------------------------------------------
