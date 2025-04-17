@@ -171,7 +171,7 @@ options:
 
 * `extract-text`
 
-This subcommand enable seeing before running the summarization the preprocessed input article text that goes as input to the model specified for the summarization. In other words, the retrieved article text starting from the Introduction and ending before References:
+This subcommand enables seeing before running the summarization the preprocessed input article text that goes as input to the model specified for the summarization. In other words, the retrieved article text starting from the Introduction and ending before References:
 
 ```bash
 deep-compend extract-text articles/test1.pdf
