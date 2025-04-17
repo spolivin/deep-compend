@@ -11,4 +11,4 @@ def compression_ratio(summary: str, full_text: str) -> float:
     Returns:
         float: Compression rate.
     """
-    return len(summary) / len(full_text)
+    return len(summary) / len(full_text) if len(full_text) != 0 else 0.0
