@@ -16,26 +16,7 @@ Arguments:
 
 import argparse
 
-import arxiv
-
-
-def download_arxiv_paper(arxiv_id: str, save_path: str) -> None:
-    """Downloads a PDF from ArXiv given its ID.
-
-    Args:
-        arxiv_id (str): ArXiv ID of a paper to be downloaded.
-        save_path (str): Path where to save the downloaded paper.
-    """
-    search = arxiv.Search(id_list=[arxiv_id])
-    client = arxiv.Client()
-
-    results = client.results(search)
-    for result in results:
-        result.download_pdf(filename=save_path)
-        print(f"Paper downloaded and saved to '{save_path}'")
-        return
-    print("Paper not found")
-
+from deep_compend.utils.downloads import download_arxiv_paper
 
 # Defining Arguments parser
 parser = argparse.ArgumentParser(description="ArXiv paper loader.")
