@@ -23,7 +23,7 @@ from transformers import (
 from .configs import SummaryGenerationConfig
 from .extractors import KeywordsExtractor, PDFExtractor
 from .text_preprocessing import prettify_summary
-from .utils import compression_ratio
+from .utils.metrics import compression_ratio
 
 warnings.filterwarnings("ignore")
 logging.set_verbosity_error()
