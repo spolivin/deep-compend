@@ -1,4 +1,4 @@
-from deep_compend.utils import compression_ratio
+from deep_compend.utils.metrics import compression_ratio
 
 
 def test_compression_ratio_standard_case():
