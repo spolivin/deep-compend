@@ -12,7 +12,7 @@ def test_config_defaults():
     assert config.length_penalty == 1.0
     assert config.repetition_penalty == 1.2
     assert config.no_repeat_ngram_size == 3
-    assert config.early_stopping is True
+    assert config.early_stopping
 
 
 def test_config_custom():
@@ -28,7 +28,7 @@ def test_config_custom():
     assert config.length_penalty == 1.0
     assert config.repetition_penalty == 1.2
     assert config.no_repeat_ngram_size == 2
-    assert config.early_stopping is True
+    assert config.early_stopping
 
 
 def test_config_asdict():
