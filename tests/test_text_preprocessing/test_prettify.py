@@ -3,6 +3,7 @@ import nltk
 from deep_compend.text_preprocessing import prettify_summary
 
 nltk.download("punkt", quiet=True)
+nltk.download("punkt_tab", quiet=True)
 
 
 def test_sentence_capitalization():

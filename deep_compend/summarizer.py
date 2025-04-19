@@ -28,6 +28,7 @@ from .utils.metrics import compression_ratio
 warnings.filterwarnings("ignore")
 logging.set_verbosity_error()
 nltk.download("punkt", quiet=True)
+nltk.download("punkt_tab", quiet=True)
 
 
 class ArticleSummarizer:
