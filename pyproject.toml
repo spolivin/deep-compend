@@ -1,6 +1,6 @@
 [project]
 name = "deep-compend"
-version = "0.1.0"
+version = "0.1.1"
 description = "Python library for articles summarization with LoRA and CLI support"
 authors = [{name = "Sergey Polivin", email = "s.polivin@gmail.com"}]
 keywords = ["summarization", "arxiv", "NLP", "transformers"]
