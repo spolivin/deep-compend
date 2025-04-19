@@ -6,3 +6,7 @@ pymupdf>=1.25.4
 spacy>=3.8.4
 requests>=2.32.3
 pytest>=8.3.5
+setuptools
+wheel
+build
+twine
