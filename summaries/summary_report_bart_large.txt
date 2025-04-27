@@ -1,11 +1,11 @@
-=== Summarization Report 947CA9 ===
+=== Summarization Report 4836FD ===
 
 Article path: 'articles/1512.03385.pdf'
 Model: facebook/bart-large-cnn
 Tokenizer: facebook/bart-large-cnn
 Context window: 1024
 LoRA: None
-Gen time: 2025-04-17 18:49:09
+Gen time: 2025-04-27 04:49:43
 Keywords: ['layer', 'conv', 'layers', 'fig', 'imagenet']
 
 -------------------------------------------------------------------------------------------------------

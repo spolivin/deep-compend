@@ -1,11 +1,11 @@
-=== Summarization Report 73E3B6 ===
+=== Summarization Report D91A99 ===
 
 Article path: 'articles/1512.03385.pdf'
 Model: google-t5/t5-base
 Tokenizer: google-t5/t5-base
 Context window: 1024
 LoRA: None
-Gen time: 2025-04-17 18:51:21
+Gen time: 2025-04-27 04:51:31
 Keywords: ['layer', 'fig', 'conv', 'layers', 'imagenet']
 
 -------------------------------------------------------------------------------------------------------
