@@ -1,13 +1,14 @@
 [project]
 name = "deep-compend"
-version = "0.1.1"
-description = "Python library for articles summarization with LoRA and CLI support"
+version = "0.1.2"
+description = "Library for scientific PDF-articles summarization"
 authors = [{name = "Sergey Polivin", email = "s.polivin@gmail.com"}]
 keywords = ["summarization", "arxiv", "NLP", "transformers"]
 classifiers = [
   "Programming Language :: Python :: 3",
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
+  "Development Status :: 3 - Alpha",
 ]
 readme = "README.md"
 requires-python = ">=3.8"
@@ -28,7 +29,13 @@ build = ["setuptools", "wheel", "build", "twine"]
 linters = ["black", "isort", "pre-commit"]
 
 [project.scripts]
-deep-compend = "deep_compend.cli:main"
+deep-compend = "deep_compend.cli.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/spolivin/deep-compend"
+Issues = "https://github.com/spolivin/deep-compend/issues"
+Pull-requests = "https://github.com/spolivin/deep-compend/pulls"
+Source = "https://github.com/spolivin/deep-compend/tree/master/deep_compend"
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
