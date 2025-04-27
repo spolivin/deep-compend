@@ -1,13 +1,33 @@
 # ***DeepCompend***
 
- *DeepCompend* is a Python library capable of using any *Hugging Face* summarization model for quick generation of summaries of scientific articles in TXT-format.
+[![PyPI](https://img.shields.io/pypi/v/deep-compend)](https://pypi.org/project/deep-compend/)
+[![Tests](https://github.com/spolivin/deep-compend/actions/workflows/publish.yml/badge.svg)](https://github.com/spolivin/deep-compend/actions/workflows/publish.yml)
+[![License](https://img.shields.io/github/license/spolivin/deep-compend)](https://github.com/spolivin/deep-compend/blob/master/LICENSE.txt)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://pre-commit.com/)
+
+ *DeepCompend* is a Python library capable of using any *Hugging Face* summarization model for quick generation of summaries of scientific articles in TXT-format. Using a CLI integrated into library, one can generate summaries and package them into summary reports alongside other helpful information quite easily.
 
 ## Installation
 
-Firstly, we clone the repository:
+In order to use the library one can download the latest version of the library from [PyPi](https://pypi.org/project/deep-compend/) into the virtual environment using the following command:
+
+```bash
+pip install deep-compend
+```
+
+One can also install the library together with `pytest`, build packages and linters for code prettification:
+
+```bash
+pip install deep-compend[test,build,linters]
+```
+
+### Development mode
+
+In case one wants to install the library in development mode we need to firstly clone the repository:
 
 ```bash
 git clone https://github.com/spolivin/deep-compend.git
+cd deep-compend
 ```
 
 Next, we need to create and activate the virtual environment:
@@ -30,19 +50,8 @@ source .venv/bin/activate
 Lastly, we install the library in editable mode:
 
 ```bash
-pip install setuptools wheel
-pip install -e .
+pip install -e .[test,build,linters]
 ```
-
-Since the library makes use of *Spacy*'s language models for important words extraction, it is also necessary to install some model, for instance, `en_core_web_sm`:
-```bash
-# Windows
-python -m spacy download en_core_web_sm
-
-# Linux
-python3.12 -m spacy download en_core_web_sm
-```
-> One can of course opt for loading other Spacy's language models: `en_core_web_md` or `en_core_web_lg`
 
 ## Python API
 
@@ -111,10 +120,16 @@ options:
 
 * `summarize`
 
-This subcommand launches the process of summarization and report generation like so for instance:
+This subcommand launches the process of summarization like so for instance and displays the generated summary:
 
 ```bash
 deep-compend summarize articles/test1.pdf --config=configs/config.json
+```
+
+In case one wants not to just display the summary but create a report for it, it is necessary to add extra `--generate-summary-report` flag:
+
+```bash
+deep-compend summarize articles/test1.pdf --config=configs/config.json --generate-summary-report=True
 ```
 > More examples of using this subcommand can be consulted [here](./scripts/).
 
@@ -126,6 +141,7 @@ $ deep-compend summarize --help
 usage: deep-compend summarize [-h] [-c CONFIG] [-mp MODEL_PATH] [-tp TOKENIZER_PATH] [-mxot MAX_OUTPUT_TOKENS] [-mnot MIN_OUTPUT_TOKENS] [-nb NUM_BEAMS]
                               [-lp LENGTH_PENALTY] [-rp REPETITION_PENALTY] [-nrns NO_REPEAT_NGRAM_SIZE] [-lap LORA_ADAPTERS_PATH] [-lw LINE_WIDTH]
                               [-mkn MAX_KEYWORDS_NUM] [-mkl MIN_KEYWORDS_LENGTH] [-rn REPORT_NAME] [-sf SAVE_FOLDER] [-slm SPACY_LANG_MODEL]
+                              [-gsr GENERATE_SUMMARY_REPORT]
                               filepath
 
 Summarizes a PDF article using a Hugging Face model
@@ -167,6 +183,8 @@ options:
                         Folder to save the generated summary
   -slm SPACY_LANG_MODEL, --spacy-lang-model SPACY_LANG_MODEL
                         Name of Spacy language model to be used for keyword extraction
+  -gsr GENERATE_SUMMARY_REPORT, --generate-summary-report GENERATE_SUMMARY_REPORT
+                        Trigger for summary report generation
 ```
 
 * `extract-text`
@@ -232,6 +250,25 @@ bash scripts/run_t5_small_override.sh articles/1512.03385.pdf
 ```
 
 After running these commands, the respective summary reports with additional information and statistics will be generated and saved in `summaries` folder (by default).
+
+## Tests
+
+The library can be tested using the tests present in this repo but first one needs to make sure that the following command has been run:
+
+```bash
+pip install deep-compend[test]
+```
+Or this one (if the library is to be in development mode):
+
+```bash
+pip install -e .[test]
+```
+
+After that we can easily launch automatic tests:
+
+```bash
+pytest
+```
 
 ## Library limitations
 
