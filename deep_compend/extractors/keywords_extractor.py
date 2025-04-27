@@ -1,5 +1,6 @@
 """Extraction of keywords."""
 
+import sys
 from collections import Counter
 
 import spacy
@@ -32,6 +33,17 @@ class KeywordsExtractor:
         self.lm = lm
         self.min_kwrd_length = min_kwrd_length
         self.most_common_elems = most_common_elems
+
+        # Downloading a SpaCy language model if not present
+        try:
+            spacy.load(self.lm)
+        except OSError:
+            import subprocess
+
+            subprocess.run(
+                [sys.executable, "-m", "spacy", "download", f"{self.lm}"],
+                check=True,
+            )
 
     def extract(self, text: str) -> list[str]:
         """
