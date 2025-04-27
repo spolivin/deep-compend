@@ -1,4 +1,4 @@
 # ruff: noqa: F401
 
-from .configs import SummaryGenerationConfig
-from .summarizer import ArticleSummarizer
+from .core.configs import SummaryGenerationConfig
+from .core.summarizer import ArticleSummarizer
