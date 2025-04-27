@@ -38,13 +38,3 @@ repos:
     rev: v2.2.4
     hooks:
     -   id: codespell
-
--   repo: local
-    hooks:
-    -   id: run-pytest
-        name: Run tests with pytest
-        entry: pytest
-        language: system
-        types: [python]
-        stages: [push]
-        files: ^(deep_compend/|tests/)
