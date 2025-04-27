@@ -2,6 +2,12 @@ import re
 
 import nltk
 
+from ..utils.downloads import ensure_nltk_resource
+
+# Checking the presence of auxiliary NLTK packages
+ensure_nltk_resource(resource_id="tokenizers/punkt")
+ensure_nltk_resource(resource_id="tokenizers/punkt_tab")
+
 
 def prettify_summary(summary: str) -> str:
     """
@@ -20,7 +26,7 @@ def prettify_summary(summary: str) -> str:
     prettified_summary = re.sub(r"\s+([.,!?])", r"\1", prettified_summary)
     # Fixing word shift problems: e.g. regul- ation
     prettified_summary = re.sub(
-        r"(\w+)-\s*\n*\s*(\w+)", r"\1\2", prettified_summary
+        r"(\w+)-\s+\n*\s*(\w+)", r"\1\2", prettified_summary
     )
     # Removing numbers after words: e.g. regularities1
     prettified_summary = re.sub(r"(\w+)\d+", r"\1", prettified_summary)
