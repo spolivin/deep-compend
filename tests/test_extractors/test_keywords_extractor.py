@@ -1,17 +1,6 @@
 import pytest
-import spacy
 
 from deep_compend.extractors import KeywordsExtractor
-
-# Loading "en_core_web_sm" model if it is not loaded yet
-try:
-    spacy.load("en_core_web_sm")
-except OSError:
-    import subprocess
-
-    subprocess.run(
-        ["python", "-m", "spacy", "download", "en_core_web_sm"], check=True
-    )
 
 
 @pytest.fixture
@@ -32,21 +21,25 @@ def test_default_extraction(sample_text):
     assert "neural" in keywords or "networks" in keywords
 
 
-def test_custom_length_filtering(sample_text):
+@pytest.mark.parametrize(
+    "min_len,max_num",
+    [
+        (3, 20),
+        (5, 40),
+        (9, 15),
+        (4, 10),
+    ],
+)
+def test_class_attributes(sample_text, min_len, max_num):
     """Tests keywords extraction for fixed minimum keyword length."""
-    extractor = KeywordsExtractor(min_kwrd_length=6)
+    extractor = KeywordsExtractor(
+        min_kwrd_length=min_len, most_common_elems=max_num
+    )
     keywords = extractor.extract(sample_text)
     assert isinstance(keywords, list)
     # Verifying filtering out short words like "mit" or "ai"
-    assert all(len(k) >= 6 for k in keywords)
-
-
-def test_most_common_limit(sample_text):
-    """Tests keyword extraction for fixed number of most common words."""
-    extractor = KeywordsExtractor(most_common_elems=3)
-    keywords = extractor.extract(sample_text)
-    assert isinstance(keywords, list)
-    assert len(keywords) <= 3
+    assert all(len(k) >= min_len for k in keywords)
+    assert len(keywords) <= max_num
 
 
 def test_empty_input():
