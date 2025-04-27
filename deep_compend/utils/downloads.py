@@ -1,7 +1,5 @@
 """File downloading module."""
 
-import requests
-
 
 def download_arxiv_paper(
     arxiv_id: str, save_path: str, chunk_size: int = 8192
@@ -13,6 +11,8 @@ def download_arxiv_paper(
         save_path (str): Path where to save a downloaded paper.
         chunk_size (int, optional): Number of bytes to be read when downloading. Defaults to 8192.
     """
+    import requests
+
     # Setting URL from where to download a paper
     url = f"https://arxiv.org/pdf/{arxiv_id}.pdf"
 
@@ -35,3 +35,17 @@ def download_arxiv_paper(
             )
     except requests.RequestException as e:
         print(f"Error downloading paper: {e}")
+
+
+def ensure_nltk_resource(resource_id: str) -> None:
+    """Looks for NLTK resource and downloads it if not present.
+
+    Args:
+        resource_id (str): Name of NLTK resource.
+    """
+    import nltk
+
+    try:
+        nltk.data.find(resource_id)
+    except LookupError:
+        nltk.download(resource_id.split("/")[1], quiet=True)
